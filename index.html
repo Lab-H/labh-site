@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lab H | AI·모바일 전문 QA 테스트랩</title>
+  <meta name="description" content="AI·모바일 전문 QA 테스트랩. 빠르고 정확한 품질 검증 — M/D · M/M · 프로젝트 패키지 제공" />
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#f8fafc;
+      --border:#e5e7eb;
+      --text:#0f172a;
+      --muted:#475569;
+      --muted2:#64748b;
+      --brand:#1d4ed8;
+      --brand2:#0b3aa6;
+      --ok:#16a34a;
+      --warn:#f59e0b;
+      --bad:#dc2626;
+      --shadow: 0 10px 30px rgba(2,6,23,.08);
+      --radius: 18px;
+      --max: 1120px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Apple SD Gothic Neo, "Noto Sans KR", Arial, sans-serif;
+      background:var(--bg); color:var(--text);
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      background:rgba(255,255,255,.9); backdrop-filter:saturate(140%) blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav{
+      display:flex; align-items:center; gap:14px; padding:14px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:-.2px;
+    }
+    .logo{
+      width:34px; height:34px; border-radius:12px;
+      background: linear-gradient(135deg, var(--brand), #60a5fa);
+      box-shadow: var(--shadow);
+    }
+    .links{
+      display:flex; gap:12px; flex-wrap:wrap;
+      margin-left:10px;
+      font-size:13px; color:var(--muted);
+    }
+    .links a{ text-decoration:none; padding:8px 10px; border-radius:12px }
+    .links a:hover{ background:var(--panel); color:var(--text) }
+    .cta{
+      margin-left:auto; display:flex; gap:10px; align-items:center;
+    }
+    .btn{
+      border:1px solid var(--border);
+      background:white; padding:10px 12px; border-radius:14px;
+      text-decoration:none; font-weight:650; font-size:13px;
+    }
+    .btn.primary{
+      background:var(--brand); border-color:var(--brand); color:white;
+    }
+    .btn.primary:hover{ background:var(--brand2); border-color:var(--brand2) }
+    .btn:hover{ box-shadow:0 8px 18px rgba(2,6,23,.08) }
+
+    .hero{
+      padding:46px 0 26px;
+      border-bottom:1px solid var(--border);
+      background:
+        radial-gradient(1100px 400px at 70% 10%, rgba(29,78,216,.12), transparent 60%),
+        radial-gradient(900px 360px at 30% 0%, rgba(96,165,250,.12), transparent 55%);
+    }
+    .hero-grid{
+      display:grid; grid-template-columns: 1.15fr .85fr; gap:22px; align-items:start;
+    }
+    h1{font-size:46px; line-height:1.08; margin:0; letter-spacing:-1px}
+    .sub{color:var(--muted); font-size:18px; margin-top:14px; max-width:54ch}
+    .pillrow{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
+    .pill{
+      font-size:12px; color:var(--muted);
+      padding:8px 10px; border-radius:999px;
+      background:rgba(248,250,252,.9);
+      border:1px solid var(--border);
+    }
+    .hero-card{
+      background:white; border:1px solid var(--border); border-radius:var(--radius);
+      box-shadow: var(--shadow); padding:18px;
+    }
+    .hero-card h3{margin:0 0 6px; font-size:14px}
+    .hero-card p{margin:0; color:var(--muted); font-size:13px; line-height:1.55}
+    .hero-actions{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap}
+    .grid4{
+      display:grid; grid-template-columns: repeat(4, 1fr); gap:14px;
+      margin-top:22px;
+    }
+    .card{
+      border:1px solid var(--border); background:white;
+      border-radius:var(--radius); padding:16px;
+    }
+    .card h4{margin:0; font-size:14px}
+    .card p{margin:8px 0 0; font-size:13px; color:var(--muted); line-height:1.55}
+    .section{padding:46px 0; border-bottom:1px solid var(--border)}
+    .section .head{
+      display:flex; align-items:end; justify-content:space-between; gap:20px; flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+    .kicker{color:var(--brand); font-weight:800; font-size:12px; letter-spacing:.12em; text-transform:uppercase}
+    h2{margin:6px 0 0; font-size:28px; letter-spacing:-.6px}
+    .desc{margin:8px 0 0; color:var(--muted); max-width:70ch; line-height:1.7}
+    .cols2{display:grid; grid-template-columns: 1fr 1fr; gap:14px}
+    .cols3{display:grid; grid-template-columns: repeat(3,1fr); gap:14px}
+    .box{
+      background:var(--panel); border:1px solid var(--border);
+      border-radius:var(--radius); padding:18px;
+    }
+    .box h3{margin:0; font-size:15px}
+    .box ul{margin:10px 0 0; padding-left:18px; color:var(--muted); font-size:13px; line-height:1.65}
+    .tag{display:inline-block; font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid var(--border); background:white; color:var(--muted)}
+    .price{
+      display:flex; gap:8px; align-items:center; margin-top:10px; flex-wrap:wrap;
+      font-size:13px; color:var(--muted);
+    }
+    .badge{font-size:12px; font-weight:800; padding:6px 10px; border-radius:999px; color:white; background:var(--brand)}
+    .table{
+      width:100%; border-collapse:separate; border-spacing:0; overflow:hidden;
+      border:1px solid var(--border); border-radius:var(--radius); background:white;
+    }
+    .table th, .table td{
+      text-align:left; padding:12px 12px; border-bottom:1px solid var(--border);
+      font-size:13px;
+    }
+    .table th{background:var(--panel); color:var(--muted); font-weight:800}
+    .table tr:last-child td{border-bottom:none}
+    .muted{color:var(--muted)}
+    .steps{counter-reset:step}
+    .step{
+      background:white; border:1px solid var(--border); border-radius:var(--radius); padding:16px;
+    }
+    .step:before{
+      counter-increment:step;
+      content: counter(step);
+      display:inline-grid; place-items:center;
+      width:26px; height:26px; border-radius:10px;
+      background:var(--panel); border:1px solid var(--border);
+      font-weight:900; margin-right:10px;
+    }
+    .step-title{font-weight:850}
+    details{
+      background:white; border:1px solid var(--border); border-radius:var(--radius);
+      padding:14px 16px;
+    }
+    details + details{margin-top:10px}
+    summary{cursor:pointer; font-weight:800}
+    summary::marker{color:var(--brand)}
+    .footer{padding:28px 0; color:var(--muted2); font-size:13px}
+    .small{font-size:12px; color:var(--muted2)}
+    .contact-grid{display:grid; grid-template-columns: 1fr 1fr; gap:14px}
+    label{display:block; font-size:12px; color:var(--muted); font-weight:750; margin-bottom:6px}
+    input, select, textarea{
+      width:100%; padding:11px 12px; border:1px solid var(--border); border-radius:14px;
+      font:inherit; font-size:14px; background:white;
+    }
+    textarea{min-height:120px; resize:vertical}
+    .note{
+      background:rgba(29,78,216,.06);
+      border:1px dashed rgba(29,78,216,.35);
+      border-radius:var(--radius);
+      padding:14px 16px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.6;
+    }
+
+    @media (max-width: 920px){
+      .hero-grid{grid-template-columns:1fr}
+      h1{font-size:40px}
+      .grid4{grid-template-columns:1fr 1fr}
+      .cols3{grid-template-columns:1fr}
+      .cols2{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr}
+      .cta{display:none}
+    }
+    @media (max-width: 520px){
+      h1{font-size:34px}
+      .grid4{grid-template-columns:1fr}
+      .links{gap:6px}
+      .links a{padding:8px 8px}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <div class="nav">
+        <div class="brand">
+          <div class="logo" aria-hidden="true"></div>
+          <div>Lab H</div>
+        </div>
+
+        <div class="links" role="navigation" aria-label="Primary">
+          <a href="#home">Home</a>
+          <a href="#services">Services</a>
+          <a href="#aiqa">AI QA</a>
+          <a href="#process">How We Work</a>
+          <a href="#deliverables">Deliverables</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#about">About</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <div class="cta">
+          <a class="btn" href="#services">서비스 보기</a>
+          <a class="btn primary" href="#contact">견적 요청하기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">QA TEST LAB</div>
+          <h1>AI·모바일 전문 QA 테스트랩</h1>
+          <p class="sub">빠르고 정확한 품질 검증 — <b>M/D · M/M · 프로젝트 패키지</b> 제공</p>
+
+          <div class="pillrow">
+            <div class="pill">On-device AI 검증</div>
+            <div class="pill">리스크 기반 회귀</div>
+            <div class="pill">모바일/웹/임베디드</div>
+            <div class="pill">Jira/Notion 이슈 운영</div>
+          </div>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#contact">견적 요청하기</a>
+            <a class="btn" href="#services">문의 전 서비스 구조 보기</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <h3>3초 이해 → 1분 신뢰 → 3분 문의</h3>
+          <p>Lab H는 모바일·AI 기능 중심 제품을 대상으로, 빠른 투입(M/D)부터 장기 운영(M/M), 프로젝트 패키지까지 상황에 맞춰 QA를 제공합니다.</p>
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+            <span class="tag">AI 기능 검증</span>
+            <span class="tag">회귀/변경점 기반</span>
+            <span class="tag">자동화(Appium/Selenium)</span>
+            <span class="tag">VRT/시각검증</span>
+          </div>
+
+          <div style="margin-top:14px" class="note">
+            <b>제안서/브랜딩용 사이트</b>로, 실제 프로젝트는 보안상 상세 자료 대신 형태(샘플/썸네일)로 안내합니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="grid4">
+        <div class="card">
+          <h4>AI 기능 검증 전문</h4>
+          <p>STT/TTS, NLP/LLM, Vision·Generative 기능의 품질/정확도/안정성 검증을 수행합니다.</p>
+        </div>
+        <div class="card">
+          <h4>모바일/Web/임베디드</h4>
+          <p>Android/iOS/Web/Device 환경에 맞춘 테스트 설계와 실행이 가능합니다.</p>
+        </div>
+        <div class="card">
+          <h4>빠른 대응 (M/D)</h4>
+          <p>긴급 릴리즈·단기 투입 상황에 빠르게 맞춰 투입 및 결과 제공이 가능합니다.</p>
+        </div>
+        <div class="card">
+          <h4>리스크 기반 검증</h4>
+          <p>변경점 중심 회귀 + 위험도 우선순위로 비용 대비 효과를 극대화합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <div class="kicker">SERVICES</div>
+          <h2>서비스 소개</h2>
+          <p class="desc">상황에 맞춰 <b>On-Demand(M/D)</b>, <b>Dedicated(M/M)</b>, <b>Project QA(패키지)</b> 3가지 방식으로 제공합니다.</p>
+        </div>
+      </div>
+
+      <div class="cols3">
+        <div class="box">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:10px">
+            <h3>On-Demand QA (M/D)</h3>
+            <span class="badge">빠른 투입</span>
+          </div>
+          <ul>
+            <li>단기 투입 / 긴급 릴리즈 대응</li>
+            <li>스타트업·단기 프로젝트에 적합</li>
+            <li>스코프 기반 빠른 산출물 제공</li>
+          </ul>
+          <div class="price">
+            <span class="tag">단가 범위</span> <b>25~35만 / M/D</b> <span class="small">(예시)</span>
+          </div>
+        </div>
+
+        <div class="box">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:10px">
+            <h3>Dedicated QA (M/M)</h3>
+            <span class="badge" style="background:#0f172a">장기 운영</span>
+          </div>
+          <ul>
+            <li>1~6개월 장기 투입</li>
+            <li>고객사 내부 QA처럼 운영</li>
+            <li>웹/앱/모바일/AI 기능 대응</li>
+          </ul>
+          <div class="price">
+            <span class="tag">레벨별 요금</span> <b>M/M 계약</b> <span class="small">(상담 후 산정)</span>
+          </div>
+        </div>
+
+        <div class="box">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:10px">
+            <h3>Project QA (패키지)</h3>
+            <span class="badge" style="background:#334155">End-to-End</span>
+          </div>
+          <ul>
+            <li>프로젝트 전체 QA 책임</li>
+            <li>기능·회귀·AI·성능·Aging 포함 가능</li>
+            <li>Basic / Standard / Pro 패키지</li>
+          </ul>
+          <div class="price">
+            <span class="tag">패키지</span> <b>범위 기반 견적</b> <span class="small">(공식 안내)</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:14px" class="note">
+        <b>서비스 구성도(예시)</b> 기능 테스트 · 변경점 기반 회귀 · AI/LLM/Generative 기능 검증 · 시나리오/TC 설계 · 자동화(Appium/Selenium/VRT)
+      </div>
+    </div>
+  </section>
+
+  <!-- AI QA -->
+  <section id="aiqa" class="section">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <div class="kicker">DIFFERENTIATION</div>
+          <h2>AI QA 서비스</h2>
+          <p class="desc">고객이 가장 어려워하는 <b>AI 기능 품질 검증</b>을 실제 제품 환경 중심으로 설계·수행합니다.</p>
+        </div>
+      </div>
+
+      <div class="cols2">
+        <div class="box">
+          <h3>검증 대상</h3>
+          <ul>
+            <li>On-device AI 기능 검증</li>
+            <li>STT/TTS</li>
+            <li>NLU/NLP</li>
+            <li>Vision 기반 기능 (Generative Edit / AI Filter 등)</li>
+            <li>AI 검색·요약·추천 기능</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>검증 관점</h3>
+          <ul>
+            <li>정확도 / 재현성 / 안정성</li>
+            <li>엣지 케이스 / 언어·도메인 다양성</li>
+            <li>성능(지연/리소스) / 발열·배터리 영향</li>
+            <li>품질 기준(Index) 정의 및 리포팅 구조 제공 가능</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process" class="section">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <div class="kicker">HOW WE WORK</div>
+          <h2>프로세스 소개</h2>
+          <p class="desc">투명한 QA 운영으로 “진행 상황이 보이는” 검증을 지향합니다.</p>
+        </div>
+      </div>
+
+      <div class="cols3 steps">
+        <div class="step"><span class="step-title">요구사항 분석</span><div class="muted" style="margin-top:6px">목표/우선순위/리스크 파악</div></div>
+        <div class="step"><span class="step-title">Scope 정의</span><div class="muted" style="margin-top:6px">범위/일정/산출물 합의</div></div>
+        <div class="step"><span class="step-title">시나리오/TC 설계</span><div class="muted" style="margin-top:6px">케이스 구조화/커버리지 확보</div></div>
+        <div class="step"><span class="step-title">검증 수행</span><div class="muted" style="margin-top:6px">기능·회귀·AI·성능 등</div></div>
+        <div class="step"><span class="step-title">이슈 관리</span><div class="muted" style="margin-top:6px">Jira/Notion 기반 운영</div></div>
+        <div class="step"><span class="step-title">주간 보고</span><div class="muted" style="margin-top:6px">현황/리스크/다음 액션</div></div>
+        <div class="step"><span class="step-title">릴리즈 검증</span><div class="muted" style="margin-top:6px">배포 전 최종 체크</div></div>
+        <div class="step"><span class="step-title">종료 보고</span><div class="muted" style="margin-top:6px">결과 요약/개선 제안</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DELIVERABLES -->
+  <section id="deliverables" class="section">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <div class="kicker">OUTPUTS</div>
+          <h2>산출물 예시</h2>
+          <p class="desc">실제 내용은 비공개 처리하되, “형태”만으로도 신뢰가 생기도록 구성합니다.</p>
+        </div>
+      </div>
+
+      <table class="table" aria-label="Deliverables table">
+        <thead>
+          <tr>
+            <th>Deliverable</th>
+            <th>내용</th>
+            <th>형태</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Test Plan</b></td><td class="muted">범위/전략/일정/리스크</td><td class="muted">썸네일/샘플</td></tr>
+          <tr><td><b>Test Cases</b></td><td class="muted">시나리오/케이스/우선순위</td><td class="muted">문서/시트</td></tr>
+          <tr><td><b>Issue List</b></td><td class="muted">이슈 현황/재현/분석</td><td class="muted">Jira/Notion</td></tr>
+          <tr><td><b>Coverage Matrix</b></td><td class="muted">기능×케이스 커버리지</td><td class="muted">매트릭스</td></tr>
+          <tr><td><b>Weekly Report</b></td><td class="muted">주간 현황/리스크/다음 액션</td><td class="muted">PDF/슬라이드</td></tr>
+          <tr><td><b>Final Report</b></td><td class="muted">결과 요약/개선 제안</td><td class="muted">PDF</td></tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top:14px" class="note">
+        <b>TIP:</b> 나중에 실제 프로젝트가 생기면, 이 섹션에 “샘플 캡처 이미지”를 추가하면 신뢰도가 확 뛰어요.
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="section">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <div class="kicker">PRICING</div>
+          <h2>가격 안내</h2>
+          <p class="desc">초기 버전은 “가격 범위” 중심으로 안내하고, 프로젝트 특성에 따라 최종 견적을 산정합니다.</p>
+        </div>
+      </div>
+
+      <div class="cols3">
+        <div class="box">
+          <h3>M/D 단가</h3>
+          <ul>
+            <li>예: 25~35만 / M/D</li>
+            <li>긴급 투입·단기 대응</li>
+            <li>범위/난이도에 따라 조정</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>M/M 단가 (레벨별)</h3>
+          <ul>
+            <li>1~6개월 장기 운영</li>
+            <li>주간 리포트/이슈 관리 포함</li>
+            <li>레벨/스코프에 따라 산정</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>패키지 (Basic/Standard/Pro)</h3>
+          <ul>
+            <li>프로젝트 전체 QA 책임</li>
+            <li>기능·회귀·AI·성능·Aging 옵션</li>
+            <li>산정 공식 기반 견적</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top:14px" class="note">
+        <b>견적 산정(예시)</b> 스코프(기능 수) × 플랫폼(모바일/웹/임베디드) × 리스크(변경점/AI 포함 여부) × 일정(릴리즈 횟수)  
+        <br/><span class="small">CR(변경요청) 비용 처리 방식은 계약 조건에 따라 명시합니다.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <div class="kicker">ABOUT</div>
+          <h2>회사 소개</h2>
+          <p class="desc">AI·모바일 QA 전문성과 “투명한 운영” 철학을 기반으로, 고객의 릴리즈 리스크를 줄이는 파트너가 되겠습니다.</p>
+        </div>
+      </div>
+
+      <div class="cols2">
+        <div class="box">
+          <h3>미션</h3>
+          <ul>
+            <li>빠르고 정확한 검증으로 제품의 신뢰를 높인다</li>
+            <li>AI 기능 검증의 기준을 만들고, 운영을 표준화한다</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>비전</h3>
+          <ul>
+            <li>AI·모바일 전문 QA 테스트랩으로 성장</li>
+            <li>리스크 기반 QA 운영 모델을 산업 표준으로 확장</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top:14px" class="note">
+        <b>팀 소개:</b> 초기에는 핵심 리더 중심으로 운영하되, 프로젝트 규모에 따라 전문 인력을 유연하게 구성합니다.
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <div class="kicker">FAQ</div>
+          <h2>자주 묻는 질문</h2>
+          <p class="desc">초기 상담에서 가장 많이 나오는 질문을 먼저 정리했습니다.</p>
+        </div>
+      </div>
+
+      <details>
+        <summary>QA 범위는 어떻게 정해지나요?</summary>
+        <div class="muted" style="margin-top:10px; line-height:1.7">
+          요구사항/릴리즈 일정/리스크를 기반으로 스코프를 정의하고, 우선순위 기반으로 커버리지를 설계합니다.
+        </div>
+      </details>
+      <details>
+        <summary>긴급 투입이 가능한가요?</summary>
+        <div class="muted" style="margin-top:10px; line-height:1.7">
+          가능합니다. M/D 방식으로 단기 투입 및 긴급 릴리즈 대응을 지원합니다.
+        </div>
+      </details>
+      <details>
+        <summary>AI 기능 검증 경험이 있나요?</summary>
+        <div class="muted" style="margin-top:10px; line-height:1.7">
+          STT/TTS, NLP/LLM, Vision·Generative 등 AI 기능의 정확도/안정성/성능 관점 검증 체계를 보유하고 있습니다.
+        </div>
+      </details>
+      <details>
+        <summary>계약 기간은 어떻게 되나요?</summary>
+        <div class="muted" style="margin-top:10px; line-height:1.7">
+          단기(M/D)부터 1~6개월(M/M), 프로젝트 단위 패키지까지 유연하게 구성 가능합니다.
+        </div>
+      </details>
+      <details>
+        <summary>보안/데이터는 어떻게 관리하나요?</summary>
+        <div class="muted" style="margin-top:10px; line-height:1.7">
+          NDA 및 접근 통제 원칙을 기반으로 운영하며, 산출물 공유 범위/저장 정책은 고객사 규정에 맞춰 협의합니다.
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section" style="border-bottom:none">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <div class="kicker">CONTACT</div>
+          <h2>문의/견적</h2>
+          <p class="desc">아래 폼은 “형태” 제공용입니다. 실제 운영 단계에서는 이메일/폼 연동(예: Formspree)로 제출을 받으면 됩니다.</p>
+        </div>
+        <a class="btn primary" href="mailto:hello@labh.example">이메일로 바로 문의</a>
+      </div>
+
+      <div class="contact-grid">
+        <div class="box">
+          <h3>견적 요청 폼 (샘플)</h3>
+          <form onsubmit="event.preventDefault(); alert('제안/브랜딩용 데모 폼입니다. 운영 시 폼 연동을 붙이면 제출이 가능합니다.');">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px">
+              <div>
+                <label>회사명</label>
+                <input placeholder="예: ABC Corp" />
+              </div>
+              <div>
+                <label>담당자명</label>
+                <input placeholder="홍길동" />
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px">
+              <div>
+                <label>이메일</label>
+                <input type="email" placeholder="name@company.com" />
+              </div>
+              <div>
+                <label>서비스 종류</label>
+                <select>
+                  <option>On-Demand QA (M/D)</option>
+                  <option>Dedicated QA (M/M)</option>
+                  <option>Project QA (Package)</option>
+                </select>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px">
+              <div>
+                <label>플랫폼</label>
+                <select>
+                  <option>Mobile (Android/iOS)</option>
+                  <option>Web</option>
+                  <option>Embedded / Device</option>
+                  <option>AI Feature Testing</option>
+                </select>
+              </div>
+              <div>
+                <label>예상 기간</label>
+                <input placeholder="예: 2주 / 3개월" />
+              </div>
+            </div>
+            <div style="margin-top:12px">
+              <label>설명</label>
+              <textarea placeholder="프로젝트 개요 / 목표 / 현재 문제 / 원하는 산출물 등을 적어주세요."></textarea>
+            </div>
+            <div style="display:flex; gap:10px; margin-top:12px; flex-wrap:wrap">
+              <button class="btn primary" type="submit" style="cursor:pointer">Submit</button>
+              <span class="small">운영 단계에서는 파일 첨부/자동 회신/CRM 연동도 가능</span>
+            </div>
+          </form>
+        </div>
+
+        <div class="box">
+          <h3>연락처</h3>
+          <ul class="muted" style="line-height:1.9; font-size:13px; padding-left:18px; margin-top:10px">
+            <li>Email: <a href="mailto:hello@labh.example">hello@labh.example</a></li>
+            <li>Location: Korea (Remote-friendly)</li>
+            <li>Tools: Jira / Notion / Google Workspace</li>
+          </ul>
+
+          <div style="margin-top:14px" class="note">
+            <b>다음 단계 추천:</b><br/>
+            1) Deliverables 섹션에 샘플 캡처 이미지 3~5장 추가<br/>
+            2) Contact 폼을 Formspree 등으로 연동해서 실제 제출 가능하게 만들기<br/>
+            3) 포트폴리오/사례 페이지는 첫 고객 확보 후 업데이트
+          </div>
+        </div>
+      </div>
+
+      <div class="footer wrap">
+        © <span id="y"></span> Lab H. All rights reserved.
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
