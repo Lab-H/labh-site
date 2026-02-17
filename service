@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lab H | Services</title>
+<style>
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto;
+  background:#ffffff;
+  color:#0f172a;
+}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px;}
+header{
+  border-bottom:1px solid #e5e7eb;
+  padding:16px 0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+nav a{
+  margin-right:16px;
+  text-decoration:none;
+  color:#475569;
+  font-size:14px;
+}
+.hero{
+  padding:60px 0 40px;
+}
+.hero h1{
+  font-size:42px;
+  margin:0;
+}
+.hero p{
+  color:#64748b;
+  margin-top:12px;
+  font-size:18px;
+}
+.section{
+  padding:60px 0;
+  border-top:1px solid #e5e7eb;
+}
+.grid-2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+}
+.card{
+  background:#f8fafc;
+  padding:30px;
+  border-radius:16px;
+  border:1px solid #e5e7eb;
+}
+.card h3{
+  margin-top:0;
+}
+.compare{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:30px;
+}
+.compare th,.compare td{
+  border:1px solid #e5e7eb;
+  padding:14px;
+  text-align:left;
+  font-size:14px;
+}
+.compare th{
+  background:#f1f5f9;
+}
+.cta{
+  text-align:center;
+  padding:80px 0;
+  background:#f8fafc;
+}
+.cta a{
+  background:#1d4ed8;
+  color:white;
+  padding:14px 22px;
+  border-radius:12px;
+  text-decoration:none;
+}
+footer{
+  border-top:1px solid #e5e7eb;
+  padding:30px 0;
+  font-size:13px;
+  color:#64748b;
+}
+@media(max-width:800px){
+  .grid-2{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header>
+<div><strong>Lab H</strong></div>
+<nav>
+<a href="index.html">Home</a>
+<a href="services.html">Services</a>
+<a href="ai-qa.html">AI QA</a>
+<a href="contact.html">Contact</a>
+</nav>
+</header>
+
+<section class="hero">
+<h1>Service Model</h1>
+<p>프로젝트 상황에 맞춘 3가지 QA 운영 방식</p>
+</section>
+
+<section class="section">
+<div class="grid-2">
+<div class="card">
+<h3>On-Demand QA (M/D)</h3>
+<p>단기 투입 및 긴급 릴리즈 대응에 최적화된 모델</p>
+<ul>
+<li>짧은 일정 대응</li>
+<li>변경점 중심 회귀</li>
+<li>빠른 리포트 제공</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>Dedicated QA (M/M)</h3>
+<p>고객사 내부 QA처럼 장기 운영</p>
+<ul>
+<li>1~6개월 계약</li>
+<li>주간 리포트</li>
+<li>이슈 관리 체계 포함</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="card">
+<h3>Project QA Package</h3>
+<p>프로젝트 전체 QA 책임 모델</p>
+<ul>
+<li>기능 / 회귀 / AI / 성능</li>
+<li>Basic / Standard / Pro 패키지</li>
+<li>리스크 기반 전략 설계</li>
+</ul>
+</div>
+
+<table class="compare">
+<tr>
+<th>구분</th>
+<th>M/D</th>
+<th>M/M</th>
+<th>Package</th>
+</tr>
+<tr>
+<td>투입 기간</td>
+<td>단기</td>
+<td>1~6개월</td>
+<td>프로젝트 단위</td>
+</tr>
+<tr>
+<td>운영 방식</td>
+<td>요청 기반</td>
+<td>전담 운영</td>
+<td>전체 책임</td>
+</tr>
+<tr>
+<td>보고 체계</td>
+<td>요약 리포트</td>
+<td>주간 리포트</td>
+<td>최종 보고서 포함</td>
+</tr>
+</table>
+</section>
+
+<section class="cta">
+<h2>프로젝트에 맞는 QA 모델을 상담해보세요</h2>
+<p>상황에 맞는 투입 방식과 견적을 제안드립니다.</p>
+<br>
+<a href="contact.html">견적 문의하기</a>
+</section>
+
+<footer>
+© 2026 Lab H. All rights reserved.
+</footer>
+
+</div>
+</body>
+</html>
