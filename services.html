@@ -90,6 +90,29 @@ footer{
 @media(max-width:800px){
   .grid-2{grid-template-columns:1fr;}
 }
+.tabs{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+.tab-btn{
+  border:1px solid #e5e7eb;
+  background:#ffffff;
+  padding:10px 12px;
+  border-radius:12px;
+  font-size:14px;
+  cursor:pointer;
+  color:#475569;
+}
+.tab-btn.is-active{
+  border-color:#1d4ed8;
+  color:#1d4ed8;
+  font-weight:800;
+  box-shadow: 0 8px 18px rgba(2,6,23,.08);
+}
+.tab-panel{ display:none; }
+.tab-panel.is-active{ display:block; }
 </style>
 </head>
 <body>
@@ -111,67 +134,100 @@ footer{
 <p>프로젝트 상황에 맞춘 3가지 QA 운영 방식</p>
 </section>
 
-<section class="section">
-<div class="grid-2">
-<div class="card">
-<h3>On-Demand QA (M/D)</h3>
-<p>단기 투입 및 긴급 릴리즈 대응에 최적화된 모델</p>
-<ul>
-<li>짧은 일정 대응</li>
-<li>변경점 중심 회귀</li>
-<li>빠른 리포트 제공</li>
-</ul>
-</div>
+<section class="section" id="service-tabs">
+  <div class="tabs">
+    <button class="tab-btn is-active" data-tab="md" type="button">On-Demand (M/D)</button>
+    <button class="tab-btn" data-tab="mm" type="button">Dedicated (M/M)</button>
+    <button class="tab-btn" data-tab="pkg" type="button">Project Package</button>
+  </div>
 
-<div class="card">
-<h3>Dedicated QA (M/M)</h3>
-<p>고객사 내부 QA처럼 장기 운영</p>
-<ul>
-<li>1~6개월 계약</li>
-<li>주간 리포트</li>
-<li>이슈 관리 체계 포함</li>
-</ul>
-</div>
-</div>
+  <div class="tab-panel is-active" id="tab-md">
+    <div class="grid-2">
+      <div class="card">
+        <h3>On-Demand QA (M/D)</h3>
+        <p>단기 투입 및 긴급 릴리즈 대응에 최적화된 모델</p>
+        <ul>
+          <li>짧은 일정 대응</li>
+          <li>변경점 중심 회귀</li>
+          <li>빠른 리포트 제공</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>추천 상황</h3>
+        <ul>
+          <li>릴리즈 직전 리스크 제거</li>
+          <li>QA 공백 메우기</li>
+          <li>단기 스프린트/핫픽스</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-mm">
+    <div class="grid-2">
+      <div class="card">
+        <h3>Dedicated QA (M/M)</h3>
+        <p>고객사 내부 QA처럼 장기 운영</p>
+        <ul>
+          <li>1~6개월 계약</li>
+          <li>주간 리포트</li>
+          <li>이슈 관리 체계 포함</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>운영 포인트</h3>
+        <ul>
+          <li>정기 커뮤니케이션</li>
+          <li>회귀셋 유지/확장</li>
+          <li>필요 시 자동화 단계적 도입</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-pkg">
+    <div class="card">
+      <h3>Project QA Package</h3>
+      <p>프로젝트 전체 QA 책임 모델</p>
+      <ul>
+        <li>기능 / 회귀 / AI / 성능</li>
+        <li>Basic / Standard / Pro 패키지</li>
+        <li>리스크 기반 전략 설계</li>
+      </ul>
+    </div>
+
+    <table class="compare">
+      <tr>
+        <th>구분</th>
+        <th>M/D</th>
+        <th>M/M</th>
+        <th>Package</th>
+      </tr>
+      <tr>
+        <td>투입 기간</td>
+        <td>단기</td>
+        <td>1~6개월</td>
+        <td>프로젝트 단위</td>
+      </tr>
+      <tr>
+        <td>운영 방식</td>
+        <td>요청 기반</td>
+        <td>전담 운영</td>
+        <td>전체 책임</td>
+      </tr>
+      <tr>
+        <td>보고 체계</td>
+        <td>요약 리포트</td>
+        <td>주간 리포트</td>
+        <td>최종 보고서 포함</td>
+      </tr>
+    </table>
+  </div>
 </section>
 
-<section class="section">
-<div class="card">
-<h3>Project QA Package</h3>
-<p>프로젝트 전체 QA 책임 모델</p>
-<ul>
-<li>기능 / 회귀 / AI / 성능</li>
-<li>Basic / Standard / Pro 패키지</li>
-<li>리스크 기반 전략 설계</li>
-</ul>
-</div>
-
-<table class="compare">
-<tr>
-<th>구분</th>
-<th>M/D</th>
-<th>M/M</th>
-<th>Package</th>
-</tr>
-<tr>
-<td>투입 기간</td>
-<td>단기</td>
-<td>1~6개월</td>
-<td>프로젝트 단위</td>
-</tr>
-<tr>
-<td>운영 방식</td>
-<td>요청 기반</td>
-<td>전담 운영</td>
-<td>전체 책임</td>
-</tr>
-<tr>
-<td>보고 체계</td>
-<td>요약 리포트</td>
-<td>주간 리포트</td>
-<td>최종 보고서 포함</td>
-</tr>
-</table>
+<section class="hero">
+<h1>Service Model</h1>
+<p>프로젝트 상황에 맞춘 3가지 QA 운영 방식</p>
 </section>
 
 <section class="cta">
@@ -186,5 +242,28 @@ footer{
 </footer>
 
 </div>
+
+<script>
+  const buttons = document.querySelectorAll('.tab-btn');
+  const panels = {
+    md: document.getElementById('tab-md'),
+    mm: document.getElementById('tab-mm'),
+    pkg: document.getElementById('tab-pkg'),
+  };
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.tab;
+
+      buttons.forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+
+      Object.values(panels).forEach(p => p.classList.remove('is-active'));
+      panels[key].classList.add('is-active');
+    });
+  });
+</script>
+
 </body>
 </html>
+
